@@ -51,11 +51,39 @@ boolean WiFly::reset()
 }
 
 boolean WiFly::reboot()
-{
-  sendCommand("reboot\r");
-  command_mode = false;
+{ 
+  sendCommand("reboot\r"); // first this
+  command_mode = false;    // then this
   return true;
 }
+
+boolean WiFly::runWebApp()
+{ 
+  sendCommand("run web_app\r", "READY*"); // first this
+  command_mode = false;    // then this
+  return true;
+}
+
+/*
+boolean WiFly::scan()
+{ // v4.00 in apmode you need to issue the scan command twice to 
+  // get WifiNetworks back
+  // first a short scan then a longer one
+  
+  // first a short scan of 1ms per channel
+  sendCommand("scan 1\r");
+ 
+  // 2nd longer scan
+  // timeout: 14 ch * 400 = 5600 + 1000ms
+  sendCommand("scan 400\r", "SCAN", 6600);
+
+
+  char c;
+  while (receive((uint8_t *)&c, 1, 300) > 0) {
+    Serial.print((char)c);
+  } 
+}
+*/
 
 boolean WiFly::init()
 {
@@ -255,20 +283,27 @@ boolean WiFly::sendCommand(const char *cmd, const char *ack, int timeout)
     DBG("\r\n");
     return false;
   }
+
+  DBG("run OK: ");
+  DBG(cmd);
+  DBG("\r\n");
+
   return true;
 }
   
 boolean WiFly::commandMode()
 {
-  if (command_mode)
-    return true;
+  if (command_mode) return true;
   
   if (!ask("$$$", "CMD")) {
     if (!ask("\r", "ERR")) {
       DBG("Failed to enter command mode\r\n");
+      command_mode = false; // added
       return false;
     }
   }
+
+  DBG("Entering command mode\r\n");
   command_mode = true;
   return true;
 }
@@ -282,6 +317,7 @@ boolean WiFly::dataMode()
         return false;
       }
     }
+    DBG("Data mode\r\n");
     command_mode = false;
   }
   return true;
@@ -306,6 +342,7 @@ float WiFly::version()
     buf[read_bytes] = '\0';
 
     float version;
+
     version = atof(buf);
     if (version == 0) {
         char *ptr = strchr(buf, '<');
