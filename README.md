@@ -1,12 +1,13 @@
-# WiFly Library for Arduino
+# WiFly_communicator Library for Arduino
 
-There are already some Arduino libraries for WiFly, such as http://sourceforge.net/projects/arduinowifly/.
-It seems these libraries are either too simple or too complex. So I write a new one.
-Libraries using SoftwareSerial have a common problem --- SoftwareSerial is not stable enough, It often receives wrong characters.
+This library is forked from the dev branche of https://github.com/Seeed-Shield/WiFi_Shield
 
-There are some examples:
-+ HTTP GET/POST
-+ update firmware
+The examples in this library are made for a WiFly connected to the Hardware TX/RX from an Arduino Leonardo (Serial1). 
+The benefit of Arduino Leonardo that it separates the hardware port and the normal port for debugging witht the Serial monitor (Serial). 
+
+This library is also tested with the Helios Gadget (http://www.heliosgadget.nl/)
+
+Included examples:
++ update firmware to 4.0
 + setup WiFi AP
-+ join Ad-Hoc network
-+ UDP communication
++ test
