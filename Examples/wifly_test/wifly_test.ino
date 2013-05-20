@@ -1,21 +1,23 @@
-
 #include <Arduino.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include "WiFly.h"
 
 #define SSID      "Your-SSID"
 #define KEY       "passphrase"
-#define AUTH      WIFLY_AUTH_WPA2_PSK
+// WIFLY_AUTH_OPEN / WIFLY_AUTH_WPA1 / WIFLY_AUTH_WPA1_2 / WIFLY_AUTH_WPA2_PSK
+#define AUTH      WIFLY_AUTH_WPA1_2
 
 // Pins' connection
 // Arduino       WiFly
 //  2    <---->    TX
 //  3    <---->    RX
-SoftwareSerial uart(2, 3);
-WiFly wifly(&uart);
+//SoftwareSerial uart(2, 3);
+//WiFly wifly(&uart);
+WiFly wifly(&Serial1);  // WiFly connected to Serial1 on Leonardo/Helios
 
 void setup() {
-  uart.begin(9600);
+  //uart.begin(9600);
+  Serial1.begin(9600);
 
   Serial.begin(9600);
   Serial.println("--------- WIFLY TEST --------");

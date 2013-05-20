@@ -1,6 +1,5 @@
-
 #include <Arduino.h>
-#include <SoftwareSerial.h>
+//#include <SoftwareSerial.h>
 #include "WiFly.h"
 
 #define SSID      "AP-SSID"
@@ -9,9 +8,13 @@
 // Arduino       WiFly
 //  2    <---->    TX
 //  3    <---->    RX
-WiFly wifly(2, 3);
+//SoftwareSerial uart(2, 3);
+//WiFly wifly(&uart);
+WiFly wifly(&Serial1);  // WiFly connected to Serial1 on Leonardo/Helios
 
 void setup() {
+  //uart.begin(9600);
+  Serial1.begin(9600);
   Serial.begin(9600);
   Serial.println("--------- WIFLY AP --------");
   
@@ -21,7 +24,7 @@ void setup() {
   Serial.println(ver);
   if (ver < 2.45) {
     Serial.println("Warning! The WiFly's firmware probably doesn't support AP mode.");
-    Serial.println("Update the WiFly's firmware with wifly_update example");
+    Serial.println("Update the WiFly's firmware with wifly_firmware_update example");
   }
   
   wifly.reset();                                  // factory RESET

@@ -5,8 +5,8 @@
 #include <Arduino.h>
 #include <Stream.h>
 
-#define DEFAULT_WAIT_RESPONSE_TIME      1000        // 1000ms
-#define DEFAULT_BAUDRATE                9600
+#define DEFAULT_WAIT_RESPONSE_TIME      1500        // 1000ms
+#define DEFAULT_BAUDRATE                19200
 #define MAX_CMD_LEN                     32
 #define MAX_TRY_JOIN                    3
 
@@ -38,6 +38,8 @@ class WiFly : public Stream
     boolean init();
     boolean reset();
     boolean reboot();
+    boolean runWebApp();
+    //boolean scan();
     
     boolean join(const char *ssid, const char *phrase = NULL, int auth = WIFLY_AUTH_OPEN);
     boolean leave();
