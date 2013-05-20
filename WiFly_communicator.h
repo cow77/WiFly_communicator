@@ -1,4 +1,3 @@
-
 #ifndef __WIFLY_H__
 #define __WIFLY_H__
 
