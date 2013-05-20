@@ -1,5 +1,5 @@
 #include <string.h>
-#include "WiFly.h"
+#include "WiFly_communicator.h"
 #include "Debug.h"
 
 WiFly* WiFly::instance;

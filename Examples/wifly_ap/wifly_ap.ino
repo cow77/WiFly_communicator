@@ -1,6 +1,6 @@
 #include <Arduino.h>
 //#include <SoftwareSerial.h>
-#include "WiFly.h"
+#include "WiFly_communicator.h"
 
 #define SSID      "AP-SSID"
 
@@ -16,6 +16,12 @@ void setup() {
   //uart.begin(9600);
   Serial1.begin(9600);
   Serial.begin(9600);
+
+  // don't do anything until the serial monitor is opened
+  while (!Serial) {
+    ; // wait for serial port to connect. 
+  }
+
   Serial.println("--------- WIFLY AP --------");
   
   float ver;
