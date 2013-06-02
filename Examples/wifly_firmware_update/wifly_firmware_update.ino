@@ -39,6 +39,16 @@ void setup()
   //wifly.sendCommand("boot image 2\r", "=OK");        
   //wifly.sendCommand("save\r", "Storing");   
   //wifly.reboot();  
+  
+  // run factory reset otherwise ftp connection doesn't work sometimes
+  Serial1.begin(9600); 
+  wifly.reset(); // factory reset in case settings where changed
+  wifly.sendCommand("save\r", "Storing"); // save
+  wifly.reboot();
+  delay(200);
+  Serial1.flush();
+  Serial1.end();  
+
     
   initWifly();
 }
@@ -54,7 +64,8 @@ void initWifly()
     delay(200);
     
     wifly.sendCommand("set i d 1\r", "AOK");
-    wifly.sendCommand("set w j 0\r", "AOK");    
+    wifly.sendCommand("set w j 0\r", "AOK");  
+    wifly.sendCommand("set o j 2000\r", "AOK");  
     wifly.sendCommand("save\r", "Storing"); 
     
     while (1) {

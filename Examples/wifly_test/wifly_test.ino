@@ -29,7 +29,7 @@ void setup() {
   Serial.println("--------- WIFLY TEST --------");
   
   // wait for initilization of wifly
-  delay(3000);
+  delay(500);
   
   wifly.reset();
   
