@@ -17,6 +17,7 @@
 #define WIFLY_AUTH_WPA1_2      3    // Mixed-mode WPA1 and WPA2-PSK
 #define WIFLY_AUTH_WPA2_PSK    4    // WPA2-PSK
 #define WIFLY_AUTH_ADHOC       6    // Ad-hoc, join any Ad-hoc network
+#define WIFLY_AUTH_WEP64       8    // WEP-64
 
 class WiFly : public Stream
 {
