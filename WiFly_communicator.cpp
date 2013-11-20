@@ -152,7 +152,7 @@ boolean WiFly::join(const char *ssid, const char *phrase, int auth)
 
   //key
   if (auth != WIFLY_AUTH_OPEN) {
-      if (auth == WIFLY_AUTH_WEP)
+      if ((auth == WIFLY_AUTH_WEP) || (auth == WIFLY_AUTH_WEP64))
         snprintf(cmd, MAX_CMD_LEN, "set w k %s\r", phrase);
       else
         snprintf(cmd, MAX_CMD_LEN, "set w p %s\r", phrase);
